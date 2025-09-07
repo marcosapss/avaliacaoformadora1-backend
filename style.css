@@ -1,0 +1,142 @@
+/* --- Base + fundo com grade sci-fi --- */
+:root{
+  --neo1:#22d3ee;  /* ciano neon */
+  --neo2:#a78bfa;  /* roxo neon */
+  --neo3:#34d399;  /* verde neon */
+  --glass: rgba(255,255,255,0.06);
+}
+body.bg-grid{
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(167,139,250,0.15), transparent 60%),
+    radial-gradient(1000px 500px at 110% 10%, rgba(34,211,238,0.12), transparent 60%),
+    linear-gradient(180deg, #0b0f1a 0%, #0e1222 100%);
+  min-height: 100vh;
+}
+
+/* --- Gradiente de título --- */
+.text-gradient{
+  background: linear-gradient(90deg, var(--neo1), var(--neo2));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color: transparent;
+}
+
+/* --- Badge neon --- */
+.bg-neon{
+  background: linear-gradient(90deg, var(--neo1), var(--neo2));
+  color:#0b0f1a !important;
+  box-shadow: 0 0 18px rgba(34,211,238,0.4);
+}
+.text-neon{ color: var(--neo1); }
+
+/* --- Card vidro neon --- */
+.neo-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border-radius: 16px;
+  position: relative;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.neo-glow{
+  position:absolute; inset:auto;
+  width: 220px; height: 220px;
+  filter: blur(40px); opacity: .25; z-index:0;
+  pointer-events:none; border-radius:50%;
+}
+.neo-glow-1{ top:-60px; right:-60px; background: radial-gradient(closest-side, var(--neo1), transparent); }
+.neo-glow-2{ bottom:-80px; left:-80px; background: radial-gradient(closest-side, var(--neo2), transparent); }
+
+/* --- Botão neon --- */
+.btn-neon{
+  background: linear-gradient(90deg, var(--neo1), var(--neo2));
+  border: none;
+  box-shadow: 0 0 22px rgba(167,139,250,0.25), inset 0 0 0 1px rgba(255,255,255,0.2);
+  transition: transform .08s ease, box-shadow .2s ease;
+}
+.btn-neon:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 0 30px rgba(167,139,250,0.38), inset 0 0 0 1px rgba(255,255,255,0.3);
+}
+
+/* --- Opções com hover “ciber” --- */
+.neo-option{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .05s ease;
+}
+.neo-option:hover{
+  border-color: var(--neo1, #22d3ee);
+  box-shadow: 0 0 14px rgba(34,211,238,0.2);
+  transform: translateY(-1px);
+}
+.form-check-input{
+  accent-color: var(--neo1);
+  box-shadow: 0 0 6px rgba(34,211,238,0.4);
+  background-color: transparent;
+  border:1px solid rgba(255,255,255,0.35);
+}
+.form-check-input:checked{
+  background-color: var(--neo1);
+  border-color: var(--neo1);
+  box-shadow: 0 0 10px rgba(34,211,238,0.5);
+}
+
+/* --- Progress bar com brilho --- */
+.neo-progress{
+  background: rgba(255,255,255,0.06);
+  height: 10px; border-radius: 999px;
+}
+.neo-progress .progress-bar{
+  background: linear-gradient(90deg, var(--neo1), var(--neo2));
+  box-shadow: 0 0 16px rgba(34,211,238,0.35);
+}
+
+/* --- Tela final com scanlines retro --- */
+.neo-scanlines{
+  position: relative; overflow: hidden;
+}
+.neo-scanlines::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 100% 4px; opacity: .25; pointer-events:none;
+}
+
+.neo-option {
+  display: flex; align-items: center; gap: .75rem; cursor: pointer;
+}
+.neo-option input[type="radio"] {
+  /* esconder radio nativo, mantendo acessibilidade */
+  position: absolute; opacity: 0; pointer-events: none;
+}
+.neo-option input[type="radio"]:focus + span { outline: 2px solid rgba(34,211,238,0.35); outline-offset: 2px; border-radius: 8px; }
+.neo-option input[type="radio"]:checked + span {
+  color: var(--neo1, #22d3ee);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(34,211,238,0.6);
+}
+
+
+/* animação piscar verde */
+.neo-card.feedback-acerto {
+  border-color: #22c55e !important;
+  outline: 3px solid #22c55e;          /* não desloca layout como border extra */
+  animation: blinkGreen 0.6s ease-in-out 2;
+}
+.neo-card.feedback-erro {
+  border-color: #ef4444 !important;
+  outline: 3px solid #ef4444;
+  animation: blinkRed 0.6s ease-in-out 2;
+}
+
+/* reforço caso a borda esteja “sumindo” por overflow: use o glow */
+@keyframes blinkGreen {
+  0%, 100% { box-shadow: 0 0 0px #22c55e; }
+  50%      { box-shadow: 0 0 24px #22c55e; }
+}
+
+@keyframes blinkRed {
+  0%, 100% { box-shadow: 0 0 0px #ef4444; }
+  50%      { box-shadow: 0 0 24px #ef4444; }
+}
